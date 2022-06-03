@@ -2,9 +2,11 @@
 
 import math
 import os
+from pickle import NONE
 import random
 import re
 import sys
+from tkinter.messagebox import NO
 
 class SinglyLinkedListNode:
     def __init__(self, node_data):
@@ -52,21 +54,29 @@ def print_singly_linked_list(node, sep, fptr):
 #
 #
 
+def printL(node):
+    print("_____")
+    while node != None:
+        print(node.data, sep=" => ")
+        node = node.next
+    print(None)
+
 def reverse(llist):
-    rllist = SinglyLinkedList()
-    current_node = llist
-    rllist.head = current_node
-    old_node = None
-    while current_node != None:
-        current_node.next = old_node
-        old_node = current_node
-        current_node = current_node.next
-    return rllist.head
+    precedent = None
+    current = llist
+    while current != None:
+        suivant = current.next
+        current.next = precedent
+        precedent = current
+        print("c:", current.data)
+        current = suivant
+        printL(precedent)
+    return precedent
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    fptr = open("output.txt", "w")
 
-    tests = int(input())
+    tests = 1
 
     for tests_itr in range(tests):
         llist_count = int(input())
